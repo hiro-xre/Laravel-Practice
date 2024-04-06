@@ -14,9 +14,16 @@ class RecipeController extends Controller
             ->orderBy('recipes.created_at', 'desc')
             ->limit(3)
             ->get();
-        dd($recipes);
+        // dd($recipes);
 
-        return view('home');
+        $popular = Recipe::select('recipes.id', 'recipes.title', 'recipes.description', 'recipes.created_at', 'recipes.image', 'recipes.views', 'users.name')
+            ->join('users', 'users.id', '=', 'recipes.user_id')
+            ->orderBy('recipes.views', 'desc')
+            ->limit(2)
+            ->get();
+        // dd($popular);
+
+        return view('home', compact('recipes', 'popular'));
     }
     /**
      * Display a listing of the resource.
