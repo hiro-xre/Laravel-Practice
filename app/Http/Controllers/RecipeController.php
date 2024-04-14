@@ -51,11 +51,11 @@ class RecipeController extends Controller
                 $query->where('recipes.title', 'like', '%' . $filters['title'] . '%');
             }
         }
-        $recipes = $query->get();
+        $recipes = $query->paginate(5);
 
         $categories = Category::all();
 
-        return view('recipes.index', compact('recipes', 'categories'));
+        return view('recipes.index', compact('recipes', 'categories', 'filters'));
     }
 
     /**
