@@ -79,7 +79,11 @@ class RecipeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $recipe = Recipe::find($id);
+        $recipe->increment('views');
+        dd($recipe);
+
+        return view('recipes.show', compact('recipe'));
     }
 
     /**
