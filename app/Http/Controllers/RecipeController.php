@@ -81,7 +81,6 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::find($id);
         $recipe->increment('views');
-        dd($recipe);
 
         return view('recipes.show', compact('recipe'));
     }
